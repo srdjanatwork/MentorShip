@@ -182,3 +182,13 @@ hr {
     flex-shrink: 0;
   }
 }
+
+.exampleWrapper {
+  display: flex;
+  justify-content: space-around;
+  min-height: 100px;
+}
+
+.title {
+  color: red;
+}

@@ -4,18 +4,24 @@ import { hot } from 'react-hot-loader';
 import { routeCodes } from 'constants/routes';
 import Menu from 'components/global/Menu';
 import Home from 'views/Home';
+import Example from 'views/Example/Example';
+import Page1 from 'views/Page1';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Menu />
-
-        <div className='Page'>
-          <Switch>
-            <Route exact path={ routeCodes.HOME } component={ Home } />
-          </Switch>
-        </div>
+        <MuiThemeProvider>
+          <Menu />
+          <div className='Page'>
+            <Switch>
+              <Route exact path='/' component={ Home } />
+              <Route exact path={ routeCodes.PAGE1 } component={ Page1 } />
+              <Route exact path={ routeCodes.EXAMPLE } component={ Example } />
+            </Switch>
+          </div>
+        </MuiThemeProvider>
       </div>
     );
   }

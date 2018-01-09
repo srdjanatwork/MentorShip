@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { routeCodes } from 'constants/routes';
 
 export default class Menu extends Component {
   render() {
+    const MENU_ITEMS = [
+      {
+        id: 1,
+        name: 'Home',
+        path: '/',
+      },
+      {
+        id: 2,
+        name: 'Page1',
+        path: 'Page1',
+      },
+    ];
     return (
       <div className='Menu'>
         <div className='Menu-links'>
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            exact
-            to={ routeCodes.HOME }
-          >
-            Home
-          </NavLink>
+          {MENU_ITEMS.map((item) => {
+            return (
+              <NavLink
+                key={ `item-${ item.id }` }
+                activeClassName='Menu-link--active'
+                className='Menu-link'
+                exact
+                to={ item.path }
+              >
+                {item.name }
+              </NavLink>
+              );
+          })}
         </div>
       </div>
     );

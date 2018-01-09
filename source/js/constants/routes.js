@@ -1,5 +1,5 @@
-export const publicPath = '/';
-
 export const routeCodes = {
-  HOME: publicPath,
+  HOME: '',
+  PAGE1: '/page1',
+  EXAMPLE: '/example',
 };
