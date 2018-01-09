@@ -14,7 +14,7 @@ import configureStore from 'config/store';
 import getServerHtml from 'components/server/ServerHTML';
 import App from 'views/App';
 
-import { getPeopleServer } from 'sagas/people';
+// import { getPeopleServer } from 'sagas/people';
 
 // Load SCSS
 import 'index.css';
@@ -30,7 +30,7 @@ const IS_DEVELOPMENT = app.get('env') === 'development';
 app.disable('x-powered-by');
 
 // Telling server to serve our client app build as static assets
-app.use('/client', express.static('build/client'));
+// app.use('/client', express.static('build/client'));
 
 function sendResponse(req, res, store) {
   // Dehydrates the state
@@ -91,9 +91,6 @@ function handleRequest(req, res, sagas = null, sagaArgs = {}) {
 // pass two additional params to "handleRequest"
 // array of sagas which should be completed
 // and object containing saga's options (usually req.params)
-app.get('/people', (req, res) => {
-  handleRequest(req, res, [getPeopleServer]);
-});
 
 // All other routes
 app.use((req, res) => {
