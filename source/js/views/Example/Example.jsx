@@ -3,13 +3,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+// import { Values } from 'redux-form-website-template';
+import showResults from '../showResults';
+import Login from '../Login/Login';
 
-export default class Home extends Component {
+export default class Example extends Component {
   state = {
     value: 1,
   };
 
-  handleChange = (event, index, value) => this.setState({ value });
+  handleChange = (event, value) => this.setState({ value });
   render() {
     return (
       <div>
@@ -49,6 +52,8 @@ export default class Home extends Component {
           <MenuItem value={ 2 } primaryText='Option2' />
           <MenuItem value={ 3 } primaryText='Option3' />
         </SelectField>
+        <Login onSubmit={ showResults } />
+        {/* <Values form='login' /> */}
       </div>
     );
   }

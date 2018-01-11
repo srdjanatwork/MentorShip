@@ -76,6 +76,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-form": "^7.2.0",
+    "redux-form-website-template": "0.0.97",
     "redux-saga": "^0.16.0",
     "remotedev-serialize": "^0.1.0"
   },
