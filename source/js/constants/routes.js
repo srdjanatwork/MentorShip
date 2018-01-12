@@ -1,5 +1,5 @@
 export const routeCodes = {
-  HOME: '',
+  HOME: '/',
   PAGE1: '/page1',
   EXAMPLE: '/example',
 };

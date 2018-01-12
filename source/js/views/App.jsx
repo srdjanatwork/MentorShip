@@ -7,28 +7,25 @@ import Home from 'views/Home';
 import Example from 'views/Example/Example';
 import Page1 from 'views/Page1';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import store from './store';
-
 
 class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Provider store={ store }>
-          <MuiThemeProvider store={ store }>
-            <React.Fragment>
-              <Menu />
-              <div className='Page'>
-                <Switch>
-                  <Route exact path='/' component={ Home } />
-                  <Route exact path={ routeCodes.PAGE1 } component={ Page1 } />
-                  <Route exact path={ routeCodes.EXAMPLE } component={ Example } />
-                </Switch>
-              </div>
-            </React.Fragment>
-          </MuiThemeProvider>
-        </Provider>
+        <MuiThemeProvider store={ store }>
+          <React.Fragment>
+            <Menu />
+            <div className='Page'>
+              <Switch>
+                <Route exact path='/' component={ Home } />
+                <Route exact path={ routeCodes.PAGE1 } component={ Page1 } />
+                <Route exact path={ routeCodes.EXAMPLE } component={ Example } />
+              </Switch>
+            </div>
+          </React.Fragment>
+        </MuiThemeProvider>
       </div>
     );
   }

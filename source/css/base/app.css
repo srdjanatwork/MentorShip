@@ -78,7 +78,7 @@ button:hover {
   justify-content: space-between;
   padding-bottom: 2rem;
   margin: 0 auto 2rem;
-  max-width: 60rem;
+  max-width: 80rem;
 
   @media (--lg) {
     margin-left: 20rem;
@@ -129,7 +129,7 @@ button:hover {
 }
 
 .Page {
-  max-width: 60rem;
+  max-width: 80rem;
   margin: 0 auto;
 
   @media (--lg) {

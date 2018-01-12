@@ -1,46 +1,99 @@
 /* eslint react/prop-types: 0 */
-/* eslint object-curly-newline: ["error", "never"] */
 /* eslint-env es6 */
+import React, { Component } from 'react';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
 
-import React from 'react';
-import { Field, reduxForm, propTypes } from 'redux-form';
-import submit from '../submit';
+export class Login extends Component {
+  constructor(props) {
+    super(props);
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label htmlFor={ label }>
-      {label}
-      <input { ...input } placeholder={ label } type={ type } />
-      {touched && error && <span>{error}</span>}
-    </label>
-  </div>
-);
+    this.state = {
+      isLogged: false,
+      userNameValue: '',
+    };
 
-const Login = props => {
-  const { error, handleSubmit, pristine, reset, submitting } = props;
-  return (
-    <form onSubmit={ handleSubmit(submit) }>
-      <Field
-        name='username'
-        type='text'
-        component={ renderField }
-        label='Username'
-      />
-      <Field
-        name='password'
-        type='password'
-        component={ renderField }
-        label='Password'
-      />
-      {error && <strong>{error}</strong>}
+    this.logoutForm = this.logoutForm.bind(this);
+  }
+  submit = ({ userName = '', email = '' }) => {
+    const error = {};
+    let isError = false;
+
+    if (userName.trim() === '') {
+      error.userName = 'Username is empty';
+      isError = true;
+    }
+
+    if (email.trim() === '') {
+      error.email = 'Email is empty';
+      isError = true;
+    }
+
+    if (isError) {
+      throw new SubmissionError(error);
+    } else {
+      this.setState({ isLogged: true });
+    }
+  }
+
+  handleUserName(event) {
+    this.setState({
+      userNameValue: event.target.value,
+    });
+  }
+
+  logoutForm() {
+    this.setState({
+      isLogged: false,
+    }, () => this.clearForm());
+  }
+
+  clearForm() {
+    this.setState({
+      userNameValue: '',
+    });
+  }
+
+  render() {
+    const { handleSubmit } = this.props;
+    const { isLogged, userNameValue } = this.state;
+    const renderField = ({
+      label, input, type, meta: { touched, error },
+    }) => (
       <div>
-        <button type='submit' disabled={ submitting }>Log In</button>
-        <button type='button' disabled={ pristine || submitting } onClick={ reset }>
-          Clear Values
-        </button>
+        <label htmlFor={ input.name }>{ label }
+          <input { ...input } type={ type } />
+          { touched && error &&
+            <span>{error}</span>
+          }
+        </label>
       </div>
-    </form>
-  );
-};
+    );
+    return (
+      <div>
+        {!isLogged ?
+          <form className='form' onSubmit={ handleSubmit(this.submit) }>
+            <Field
+              onChange={ (event) => this.handleUserName(event) }
+              name='userName'
+              component={ renderField }
+              type='text'
+              label='Username'
+            />
+            <Field name='email' component={ renderField } type='email' label='Email' />
+            <button type='submit'>Login</button>
+          </form> :
+          <div>
+            <p>Welcome, { userNameValue }</p>
+            <button type='submit' onClick={ this.logoutForm }>Logout</button>
+          </div>
+      }
+      </div>
+    );
+  }
+}
 
-export default reduxForm({ form: 'login' })(Login);
+Login = reduxForm({
+  form: 'contact',
+})(Login);
+
+export default Login;
